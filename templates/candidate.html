@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {{ super() }}
+            <form action="" class="mt-5">
+                {% for candidate in candidates %}
+                <div>
+                    <input type="radio" name="candidate_name" value="{{ candidate['name'] }}">
+                    <span>{{ candidate['name'] }}</span>
+                </div>
+                {% endfor %}
+                <div class="mt-5">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <input type="reset" class="btn btn-primary">
+                </div>
+
+            </form>
+
+            <div class="mt-5">
+
+                <h1>{{ candidate_full_info[name] }}</h1>
+<!--                <p>{{ candidate_full_info[position] }}</p>-->
+<!--                <img src="{{ candidate_full_info[picture] }}" width=200/>-->
+<!--                <p>{{ candidate_full_info[skills] }}</p>-->
+
+            </div>
+
+    {% endblock %}
