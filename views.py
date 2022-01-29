@@ -1,18 +1,16 @@
-from app import app
+from app import app, render_template
 import functions
 
 
-SETTINGS_FILE = 'settings.json'
-CANDIDATE_FILE = 'candidates.json'
+SETTINGS_FILE = 'static/settings.json'
+CANDIDATE_FILE = 'static/candidates.json'
 
 
 menu = {'Главная': '/',
-        'Кандидаты': '/candidate',
-        'Кандидат1ы': '/candidate',
-        'Задача 3': '/lesson3',
-        'Задача 4': '/lesson4',
-        'Авторизация': '/authorization'}
-
+        # 'Кандидаты': '/candidate/',
+        'Список': '/list',
+        'Поиск': '/search',
+        'Скилы': '/skill'}
 
 
 @app.route('/')
@@ -20,27 +18,23 @@ def index():
     return functions.settings_json(SETTINGS_FILE, menu)
 
 
-
-@app.route('/candidate/', methods=["POST", "GET"])
-def candidate():
-    return functions.candidate_list(CANDIDATE_FILE, menu)
-#
-#
-# @app.route('/list')
-# def list():
-#     return render_template('list.html')
-#
-#
-# @app.route('/search?name=<x>')
-# def search():
-#     return render_template('search.html')
-#
-#
-# @app.route('/skill/<x>')
-# def skill():
-#     return render_template('skill.html')
+@app.route('/candidate/<id_candidate>', methods=["POST", "GET"])
+def candidate(id_candidate):
+    return functions.candidate_info(CANDIDATE_FILE, menu, id_candidate)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/list')
+def list_candidates():
+    return functions.list_url(menu, CANDIDATE_FILE)
+
+
+@app.route('/search/')
+def search():
+    return functions.search_url(menu, CANDIDATE_FILE)
+
+
+
+@app.route('/skill')
+def skill():
+    return functions.skill_url(menu, CANDIDATE_FILE)
 

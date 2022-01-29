@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {{ super() }}
+
+        <form class="d-flex mt-5 mb-5">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="letter">
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+<h1>{{letter}}</h1>
+        <h1>найдено кандидатов {{ count }}</h1>
+        {% for candidate in candidates %}
+            <p><a href="/candidate/{{ candidate['id'] }}">{{ candidate['name'] }}</a></p>
+        {% endfor %}
+    {% endblock %}
